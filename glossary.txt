@@ -1,0 +1,21 @@
+* Redis Serialization Protocol(RESP): 
+    A set of rules or protocols that define how to encode messages
+    sent from a client to server where the messages are decoded.
+    Information: https://redis.io/docs/latest/develop/reference/protocol-spec/
+
+*Pointers:
+    Avoiding Copies: Embedding the bufio.Reader directly within Resp would involve copying the 
+    entire bufio.Reader object whenever a Resp object is created or passed around. 
+    By using a pointer to bufio.Reader, you avoid this overhead, as only the memory address
+    of the bufio.Reader needs to be copied.
+
+    Flexibility: Using a pointer allows for more flexibility in managing the bufio.Reader. 
+    You can pass the Resp object around efficiently while still having the ability to modify 
+    the underlying bufio.Reader if needed.
+
+    Encapsulation: Encapsulating the bufio.Reader within Resp hides its implementation details
+    and enforces a clean interface. This promotes better separation of concerns and makes 
+    the code more maintainable.
+
+    Efficient Memory Usage: Using a pointer allows for more efficient memory usage, especially 
+    when dealing with large or complex data structures like bufio.Reader.
